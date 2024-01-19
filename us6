@@ -1,0 +1,11 @@
+dd if=/dev/zero of=/swapp bs=1M count=512
+mkswap /swapp
+chmod 0600 /swapp
+swapon /swapp
+echo "/swapp swap swap defaults 0 0" >> /etc/fstab
+cp /etc/resolv.conf{,.bak}; echo -e "nameserver 2a00:1098:2b::1\nnameserver 2a01:4f9:c010:3f02::1\nnameserver 2a01:4f8:c2c:123f::1\nnameserver 2a00:1098:2c::1" > /etc/resolv.conf
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh && bash warp-go.sh
+apt update  
+apt upgrade -y
+echo -e "v4修复完成，以下是warp ipv4"
+curl -4 ip.sb
